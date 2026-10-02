@@ -56,7 +56,7 @@ export const otpVerifyController = async (req, res) => {
   await user.save();
   const token = jwt.sign(
     { sub: user._id.toString(), email: user.email },
-    secret(),
+    JWT_SECRET,
     { expiresIn: "7d" },
   );
   res.json({ token, user: publicUser(user) });

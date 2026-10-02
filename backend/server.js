@@ -20,6 +20,9 @@ app.use(cookieParser());
 app.get("/", (_req, res) =>
   res.json({ ok: true, service: "DowIT API", message: "Backend is running" }),
 );
+app.get("/api", (_req, res) =>
+  res.json({ ok: true, service: "DowIT API", message: "API is running" }),
+);
 
 app.use("/api/users", userRoutes);
 app.use("/api/auth", userRoutes);
@@ -27,6 +30,7 @@ app.use("/api/blogs", blogRoutes);
 app.use((req, res) =>
   res.status(404).json({ error: `Route not found: ${req.method} ${req.path}` }),
 );
+
 app.use((error, _req, res, _next) => {
   console.error("ERROR:", error.message, error.stack);
   res.status(error.statusCode || 500).json({ error: error.message || "Server error" });
